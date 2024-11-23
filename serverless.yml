@@ -1,0 +1,26 @@
+org: rmbalagtas18
+service: tapp-api
+frameworkVersion: '2 || 3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+  region: ap-southeast-1
+  stage: dev
+
+  environment:
+    DB: ${env:DB}
+    JWT_SECRET: ${env:JWT_SECRET}
+
+
+functions:
+  api:
+    handler: handler.server
+    events:
+      - httpApi: '*'
+
+
+package:
+  excludeDevDependencies: true
